@@ -3,21 +3,38 @@ import bodyParser from 'body-parser';
 import express from 'express';
 import mongoose from 'mongoose';
 import userRouter from './routers/userRouter.js';
+import dotenv from 'dotenv'
+import jwt from 'jsonwebtoken'
+import productRouter from './routers/productRouter.js';
 
 const app = express();
 
+dotenv.config();
+
 app.use(bodyParser.json());
 
-app.use((req, res, next)=> {
-    const token= req.header("Authorization");
-    console.log(token);
-    next();
+app.use( (req, res, next) => {
+let token = req.headers.authorization
+
+if(token != null){
+    token = token.replace('Bearer ','')
+
+    jwt.verify(token, 'Dhanushika90', (err, decoded) => {
+        if(!err){
+
+            req.user= decoded;
+          
+        }
+    });
 
 
-})
+    
+}
    
+next()
+})
 
-let mongodbUrl= "mongodb+srv://admin:1234@cluster0.k9s9f.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+let mongodbUrl= process.env.MONGO_URL
 mongoose.connect(mongodbUrl);
 let connection= mongoose.connection;
 
@@ -26,6 +43,7 @@ connection.once('open', () => {
 });
 
 app.use('/api/users', userRouter);
+app.use('/api/products', productRouter);
 
 app.listen(3000
     , () => {

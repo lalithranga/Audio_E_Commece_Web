@@ -39,7 +39,7 @@ export function loginUser(req, res) {
                         email: user.email,
                         role : user.role
 
-                    }, "secretKey");
+                    }, "Dhanushika90");
                     res.status(200).send({ message: "Login successful", token: token });
             } 
             else {
