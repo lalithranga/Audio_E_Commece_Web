@@ -6,6 +6,7 @@ import userRouter from './routers/userRouter.js';
 import dotenv from 'dotenv'
 import jwt from 'jsonwebtoken'
 import productRouter from './routers/productRouter.js';
+import reviewRouter from './routers/reviewRouter.js';
 
 const app = express();
 
@@ -44,6 +45,7 @@ connection.once('open', () => {
 
 app.use('/api/users', userRouter);
 app.use('/api/products', productRouter);
+app.use('/api/reviews', reviewRouter);
 
 app.listen(3000
     , () => {

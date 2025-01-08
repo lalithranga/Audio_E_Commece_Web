@@ -25,8 +25,4 @@ export function addProduct(req, res) {
     }).catch((error) => {
       
     })
-
-  
-
-
-}
+    }
