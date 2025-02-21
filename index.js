@@ -7,7 +7,9 @@ import dotenv from 'dotenv'
 import jwt from 'jsonwebtoken'
 import productRouter from './routers/productRouter.js';
 import reviewRouter from './routers/reviewRouter.js';
+import massageRouter from './routers/massageRouter.js';
 import cors from 'cors'
+
 
 
 const app = express();
@@ -25,7 +27,7 @@ let token = req.headers.authorization
 if(token != null){
     token = token.replace('Bearer ','')
 
-    jwt.verify(token, 'Dhanushika90', (err, decoded) => {
+    jwt.verify(token, process.env.SECRET_KEY, (err, decoded) => {
         if(!err){
 
             req.user= decoded;
@@ -51,6 +53,7 @@ connection.once('open', () => {
 app.use('/api/users', userRouter);
 app.use('/api/products', productRouter);
 app.use('/api/reviews', reviewRouter);
+app.use('/api/massage', massageRouter);
 
 
 app.listen(3000

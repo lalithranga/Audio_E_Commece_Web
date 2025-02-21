@@ -11,14 +11,17 @@ export function userRegister(req, res) {
 
     data.password = bcrypt.hashSync(data.password, 10);
     const user = new User(data);
-
+    console.log("just camuyoyoe")
+   
     user.save().then(() => {
         res.status(201).send({ message: "User registered successfully" })
+        console.log("iloweuoiyoyo")
     }).catch((error) => {
-        res.status(400).send({ message: error.message })
+        res.status(400).send({ error: "User registration failed" })
+        console.log("error is", error)
     })
 
-}
+} 
 
 export function getAllUsers(req, res) {
     User.find().then((users) => {
@@ -43,7 +46,7 @@ export function loginUser(req, res) {
                     role: user.role,
                     profilePicture: user.profilePicture
 
-                }, "Dhanushika90");
+                }, process.env.SECRET_KEY);
                 res.status(200).send({ message: "Login successful", token: token, user: user });
             }
             else {

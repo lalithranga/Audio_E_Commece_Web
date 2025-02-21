@@ -1,5 +1,3 @@
-
-import express from "express";
 import Product from "../models/product.js";
 import { isItAdmin } from "./userController.js";
 
@@ -42,6 +40,7 @@ export async function getAllProducts(req, res) {
     } else {
       const products = await Product.find({ availablity: true });
       res.send(products);
+      console.log("products", products);
     }
 
 
@@ -65,19 +64,17 @@ export async function deleteProduct(req, res) {
 
 
 export async function updateProduct(req, res) {
-
   try {
-    if (isItAdmin(req)) {
-      const data = req.body;
-      awit.Product.findOneAndUpdate(req.params.key, data);
-      res.json({ message: "Product updated successfully" });
-    }
-    else {
-      res.status(403).json({ message: "You are not authorized to perform this action" });
+    if (!isItAdmin(req)) {
+      return res.status(403).json({ message: "You are not authorized to perform this action" });
     }
 
+    const data = req.body;
+    await Product.findOneAndUpdate({ key: req.params.key }, data);
+
+    res.json({ message: "Product updated successfully" });
   } catch (error) {
     res.status(500).json({ error: "Failed to update product" });
-
   }
 }
+
