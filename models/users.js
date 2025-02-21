@@ -2,28 +2,29 @@ import express from 'express';
 import mongoose from 'mongoose';
 
 
+
 const userschema = new mongoose.Schema({
-   
-    email : {
+
+    email: {
         type: String,
         required: true,
         unique: true
-    } ,
-    password : {
+    },
+    password: {
         type: String,
         required: true
     },
-    first_name :{
+    first_name: {
         type: String,
-        required: true, 
-       unique: true
+        required: true,
+        unique: true
     },
-    last_name :{    
+    last_name: {
         type: String,
         required: true
 
     },
-    address:{
+    address: {
         type: String,
         required: true
     },
@@ -32,17 +33,17 @@ const userschema = new mongoose.Schema({
         required: true
     }
     ,
-    role: { 
+    role: {
         type: String,
         required: true,
-        default : "customer"
+        default: "customer"
     },
     profilePicture: {
         type: String,
         required: true,
-         default : "https://www.shutterstock.com/image-vector/user-profile-icon-vector-avatar-600nw-2247726673.jpg"
-    },
-
+        default: "https://www.shutterstock.com/image-vector/user-profile-icon-vector-avatar-600nw-2247726673.jpg"
+    }
+    
 
 })
 

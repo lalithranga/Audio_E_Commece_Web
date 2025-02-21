@@ -24,7 +24,7 @@ export function addReview(req, res) {
     });
 }
 
-export function getAllReviews(req, res) {
+export async function getAllReviews(req, res) {
 
 
     if (req.user == null || req.user.role != "admin") {
@@ -34,6 +34,14 @@ export function getAllReviews(req, res) {
             res.status(400).send({ message: error.message })
         })
         return
+
+        // try {
+        //     const reviews = await Review.find({ isApproved: true });
+        //     res.send(reviews);
+        // }
+        // catch (error) {
+        //     res.status(400).send({ message: error.message });
+        // }
     }
 
     if (req.user.role == "admin") {
@@ -97,3 +105,31 @@ export function approveReview(req, res) {
         res.status(403).json({ message: "You are not and admin. Only admins can approve the reviews" });
     }
 } 
+
+
+export async function getReviews(req,res) {
+    const user = req.user;
+
+     if(user==null || user.role != "admin"){
+
+        const reviews = await Review.find({isApproved:true})
+        res.json(reviews)
+    }
+    //     const reviews = await Review.find({ isApproved:true })
+    //        res.json(reviews);
+    //     });
+    //     return;
+    // }
+
+    try{
+        if(user.role == "admin"){
+            const reviews = await Review.find();
+            res.json(reviews);
+        }else if(user==null || user.role != "admin"){
+            const reviews = await Review.find({isApproved:true})
+            res.json(reviews)
+        }
+    }catch(error){
+        res.status(500).json({error:"Failed to get reviews"})
+    }
+}

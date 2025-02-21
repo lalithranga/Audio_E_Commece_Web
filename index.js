@@ -7,8 +7,13 @@ import dotenv from 'dotenv'
 import jwt from 'jsonwebtoken'
 import productRouter from './routers/productRouter.js';
 import reviewRouter from './routers/reviewRouter.js';
+import cors from 'cors'
+
 
 const app = express();
+
+
+app.use(cors());
 
 dotenv.config();
 
@@ -47,7 +52,88 @@ app.use('/api/users', userRouter);
 app.use('/api/products', productRouter);
 app.use('/api/reviews', reviewRouter);
 
+
 app.listen(3000
     , () => {
     console.log('Server is running on port 3000');
 });
+
+
+// {"email": "wkdlkumaraa.com",
+// "password": "123"
+// } customer
+
+
+// "email": "wkdlkumaraaa.com",
+// "password": "123",
+
+// admin
+
+
+
+
+
+
+
+
+// function getProducts(connectionStatus) {
+//     const promise = new Promise((resolve, reject) => {
+//       if (connectionStatus) {
+//         resolve([
+//           {
+//             id: 1,
+//             name: "Product 1",
+//             price: 100,
+//           },
+//           {
+//             id: 2,
+//             name: "Product 2",
+//             price: 200,
+//           },
+//         ]);
+//       } else {
+//         reject({
+//           message: "Connection failed",
+//           status: 500,
+//         });
+//       }
+//     });
+//     return promise;
+//   }
+
+
+// function getProducts(connectionStatus) {
+//     const promise = new Promise((resolve, reject) => {
+//       if (connectionStatus) {
+//         resolve([
+//           {
+//             id: 1,
+//             name: "Product 1",
+//             price: 100,
+//           },
+//           {
+//             id: 2,
+//             name: "Product 2",
+//             price: 200,
+//           },
+//         ]);
+//       } else {
+//         reject({
+//           message: "Connection failed",
+//           status: 500,
+//         });
+//       }
+//     });
+//     return promise;
+//   }
+  
+//   async function printProducts() {
+//     try {
+//       const products = await getProducts(false);
+//       console.log(products);
+//     } catch (e) {
+//       console.log(e);
+//     }
+//   }
+  
+//   printProducts();

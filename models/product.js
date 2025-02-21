@@ -1,6 +1,12 @@
 import mongoose from "mongoose";
 
+
 const product = new mongoose.Schema({    
+   key : {
+    type: String,
+    required: true,
+    unique: true
+   },
     name: {
         type: String,
         required: true
@@ -11,13 +17,19 @@ const product = new mongoose.Schema({
     },
     description: {
         type: String,
-        required: true
+       
     },
-    image: {
+    catagory: {
         type: String,
-        required: true
+       
+        default: "uncategorised"
+    },
+    dimentions: {
+        type: String,
+       
     }
+    
 });
-const Product = mongoose.model("Product", product);
+const Product = mongoose.model("productList", product);
 
 export default Product;
