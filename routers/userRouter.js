@@ -14,5 +14,3 @@ userRouter.get('/productType', selectedProduct);
 
 
 export default userRouter;
-
-// const userRouter = express.Router();
