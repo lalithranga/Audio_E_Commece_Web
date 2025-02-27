@@ -11,4 +11,6 @@ userRouter.post('/login', loginUser)
 
 userRouter.get('/productType', selectedProduct);
 
+
+
 export default userRouter;
