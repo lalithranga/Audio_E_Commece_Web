@@ -1,9 +1,5 @@
 import Massage from "../models/massage.js";
-
 import { isItAdmin } from "./userController.js";
-
-
-
 
 export async function addMassage(req, res) {
     try {

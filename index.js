@@ -10,10 +10,7 @@ import reviewRouter from './routers/reviewRouter.js';
 import massageRouter from './routers/massageRouter.js';
 import cors from 'cors'
 
-
-
 const app = express();
-
 
 app.use(cors());
 
@@ -33,10 +30,7 @@ if(token != null){
             req.user= decoded;
           
         }
-    });
-
-
-    
+    });   
 }
    
 next()

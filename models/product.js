@@ -17,7 +17,7 @@ const product = new mongoose.Schema({
     },
     description: {
         type: String,
-       
+               
     },
     catagory: {
         type: String,
@@ -28,10 +28,9 @@ const product = new mongoose.Schema({
         type: String,
        
     },
-    image : {
-        type : String,
-        
-        default : "https://cdn.pixabay.com/photo/2012/04/01/17/29/box-23649_1280.png"
+    images : {
+        type : [String],   
+        default : ["https://cdn.pixabay.com/photo/2012/04/01/17/29/box-23649_1280.png"]
     },
     availablity : {
         type : Boolean,
@@ -39,6 +38,6 @@ const product = new mongoose.Schema({
     }
     
 });
-const Product = mongoose.model("productList", product);
+const Product = mongoose.model("productsList", product);
 
 export default Product;

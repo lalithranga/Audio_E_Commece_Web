@@ -25,13 +25,11 @@ const massage = new mongoose.Schema({
         required : true
       },
       date : {
-        type : Date,
-        
+        type : Date,        
         default : Date.now()
       },
       isApproved : {
-        type : Boolean,
-        
+        type : Boolean,        
         default : false
       }
 }

@@ -4,8 +4,6 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import product from "../models/product.js";
 
-
-
 export function userRegister(req, res) {
     const data = req.body;
 
