@@ -35,6 +35,15 @@ const massage = new mongoose.Schema({
 }
 
 )
+
+
+
+
+
+
+
+
+
 const Massage = mongoose.model("Massages", massage);
 
 export default Massage
