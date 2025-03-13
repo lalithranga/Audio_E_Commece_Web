@@ -30,7 +30,6 @@ const product = new mongoose.Schema({
     images: {
         type : [String],
         required : true ,
-
         default : [
             "https://cdn.pixabay.com/photo/2012/04/01/17/29/box-23649_1280.png"            
              ]

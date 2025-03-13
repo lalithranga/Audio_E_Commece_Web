@@ -9,6 +9,7 @@ import productRouter from './routers/productRouter.js';
 import reviewRouter from './routers/reviewRouter.js';
 import massageRouter from './routers/massageRouter.js';
 import cors from 'cors'
+import orderRouter from './routers/orderRouter.js';
 
 const app = express();
 
@@ -48,6 +49,7 @@ app.use('/api/users', userRouter);
 app.use('/api/products', productRouter);
 app.use('/api/reviews', reviewRouter);
 app.use('/api/massage', massageRouter);
+app.use('/api/createOrder', orderRouter);
 
 
 app.listen(3000
