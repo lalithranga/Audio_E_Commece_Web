@@ -168,23 +168,6 @@ app.use((req, res, next) => {
 });
 ```
 
-## 🧪 Testing
-
-Run the test suite:
-
-```bash
-npm test
-# or 
-yarn test
-```
-
-Run tests in watch mode during development:
-
-```bash
-npm run test:watch
-# or
-yarn test:watch
-```
 
 ## 🔄 Scripts
 
