@@ -64,7 +64,7 @@ A robust, scalable RESTful API backend for e-commerce applications, built with *
 
 ### Prerequisites
 
-- Node.js (v14+)
+- Node.js
 - MongoDB (local or Atlas connection)
 - npm or yarn
 
