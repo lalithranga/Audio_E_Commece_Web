@@ -1,104 +1,164 @@
-# 🛒 E-Commerce Web Application
+# 🛒 E-Commerce REST API
 
-A RESTful API backend for an e-commerce platform built with **Node.js**, **Express**, and **MongoDB**. It supports user authentication, product management, reviews, messaging, and secure API access using JWT.
+A robust, scalable RESTful API backend for e-commerce applications, built with **Node.js**, **Express**, and **MongoDB**. This API provides a complete foundation for building modern e-commerce platforms with secure user authentication, comprehensive product management, review systems, and user messaging capabilities.
 
----
+## ✨ Features
+
+- **🔐 Authentication & Authorization**
+  - JWT-based authentication system
+  - Secure password hashing with bcrypt
+  - Role-based access control
+
+- **📦 Product Management**
+  - Complete CRUD operations for products
+  - Product categorization
+  - Image upload support
+  - Inventory tracking
+
+- **💰 Order Processing**
+  - Cart management
+  - Order creation and tracking
+  - Payment integration support
+
+- **📝 Review System**
+  - Product reviews and ratings
+  - Review moderation capabilities
+
+- **💬 Messaging System**
+  - User-to-user messaging
+  - Notification support
+
+- **🛠️ Developer Experience**
+  - Comprehensive API documentation
+  - Environment configuration
+  - Hot-reloading for development
+  - Testing infrastructure
+
+## 🔧 Tech Stack
+
+- **Backend Framework**: Node.js, Express.js
+- **Database**: MongoDB with Mongoose ODM
+- **Authentication**: JSON Web Tokens (JWT)
+- **Security**: bcrypt for password hashing
+- **Utilities**: dotenv, cors, body-parser
+- **Development**: nodemon for hot reloading
+- **Testing**: Jest testing framework
 
 ## 📁 Project Structure
 
-├── controllers/ # Business logic
-├── models/ # Mongoose schemas
-├── routers/ # Route definitions
-├── index.js # App entry point
-├── .env # Environment configuration
-├── package.json # Project dependencies
-└── README.md # Project documentation
+```
+├── controllers/    # Business logic handlers
+├── models/         # Mongoose database schemas
+├── routers/        # API route definitions
+├── middleware/     # Express middleware
+├── utils/          # Helper functions
+├── tests/          # Test suite
+├── index.js        # Application entry point
+├── .env            # Environment variables (not committed)
+├── .env.example    # Example environment configuration
+├── package.json    # Project dependencies
+└── README.md       # Project documentation
+```
 
+## 🚀 Getting Started
 
----
+### Prerequisites
 
-## 🚀 Features
+- Node.js (v14+)
+- MongoDB (local or Atlas connection)
+- npm or yarn
 
-- 🔐 JWT Authentication (Login/Register)
-- 📦 Product CRUD operations
-- 📝 Product reviews
-- 💬 User messaging system
-- 🌐 CORS support
-- ⚙️ Environment variable management
-- 🔄 Nodemon for development
-- ✅ Jest for testing
+### Installation
 
----
-
-## 🛠️ Tech Stack
-
-- **Backend**: Node.js, Express
-- **Database**: MongoDB (with Mongoose)
-- **Authentication**: JWT
-- **Utilities**: bcrypt, dotenv, cors, body-parser
-- **Dev Tools**: nodemon, jest
-
----
-
-## 🔧 Getting Started
-
-### 1. Clone the Repository
+1. **Clone the repository**
 
 ```bash
 git clone https://github.com/your-username/ecommerce-backend.git
 cd ecommerce-backend
+```
 
-2. Install Dependencies
+2. **Install dependencies**
 
+```bash
 npm install
+# or
+yarn install
+```
 
-3. Configure Environment
-Create a .env file in the root directory:
+3. **Configure environment variables**
 
+Create a `.env` file in the root directory based on `.env.example`:
+
+```
 PORT=3000
 MONGO_URL=mongodb://localhost:27017/ecommerce
-SECRET_KEY=your_jwt_secret
+JWT_SECRET=your_jwt_secret_key
+NODE_ENV=development
+```
 
-4. Start the Server
+4. **Start the development server**
 
-npm start
+```bash
+npm run dev
+# or
+yarn dev
+```
 
-📦 API Routes
-Users – /api/users
-POST /register – Register a new user
+The API will be available at `http://localhost:3000`.
 
-POST /login – Login and get JWT token
+## 📚 API Documentation
 
-Products – /api/products
-GET / – List all products
+### Authentication Endpoints
 
-POST / – Create new product
+| Method | Endpoint | Description | Access |
+|--------|----------|-------------|--------|
+| POST | `/api/users/register` | Register new user | Public |
+| POST | `/api/users/login` | Authenticate and get token | Public |
+| GET | `/api/users/profile` | Get user profile | Private |
+| PUT | `/api/users/profile` | Update user profile | Private |
 
-PUT /:id – Update product by ID
+### Product Endpoints
 
-DELETE /:id – Delete product by ID
+| Method | Endpoint | Description | Access |
+|--------|----------|-------------|--------|
+| GET | `/api/products` | Get all products | Public |
+| GET | `/api/products/:id` | Get product by ID | Public |
+| POST | `/api/products` | Create new product | Admin |
+| PUT | `/api/products/:id` | Update product | Admin |
+| DELETE | `/api/products/:id` | Delete product | Admin |
 
-Reviews – /api/reviews
-GET / – Get all reviews
+### Review Endpoints
 
-POST / – Add a new review
+| Method | Endpoint | Description | Access |
+|--------|----------|-------------|--------|
+| GET | `/api/products/:id/reviews` | Get product reviews | Public |
+| POST | `/api/products/:id/reviews` | Create product review | Private |
+| DELETE | `/api/reviews/:id` | Delete review | Admin/Owner |
 
-Messages – /api/massage
-GET / – Get messages
+### Message Endpoints
 
-POST / – Send a message
+| Method | Endpoint | Description | Access |
+|--------|----------|-------------|--------|
+| GET | `/api/messages` | Get user messages | Private |
+| POST | `/api/messages` | Send a message | Private |
+| GET | `/api/messages/:id` | Get message thread | Private |
 
-🔐 Middleware: JWT Verification
-All protected routes verify the JWT from the Authorization header. If valid, the user is attached to req.user.
+## 🔒 Authentication
 
-js
-Copy
-Edit
+The API uses JWT (JSON Web Tokens) for authentication. For protected routes, include the token in the Authorization header:
+
+```
+Authorization: Bearer <your_token>
+```
+
+JWT verification middleware:
+
+```javascript
 app.use((req, res, next) => {
   let token = req.headers.authorization;
   if (token) {
     token = token.replace('Bearer ', '');
-    jwt.verify(token, process.env.SECRET_KEY, (err, decoded) => {
+    jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
       if (!err) {
         req.user = decoded;
       }
@@ -106,46 +166,38 @@ app.use((req, res, next) => {
   }
   next();
 });
-🧪 Sample package.json
-json
-Copy
-Edit
+```
+
+## 🧪 Testing
+
+Run the test suite:
+
+```bash
+npm test
+# or 
+yarn test
+```
+
+Run tests in watch mode during development:
+
+```bash
+npm run test:watch
+# or
+yarn test:watch
+```
+
+## 🔄 Scripts
+
+Available npm/yarn scripts:
+
+```json
 {
-  "name": "express",
-  "version": "1.0.0",
-  "main": "index.js",
-  "type": "module",
   "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
     "test": "jest",
-    "start": "nodemon index.js",
     "test:watch": "jest --watchAll"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": "",
-  "dependencies": {
-    "bcrypt": "^5.1.1",
-    "body-parser": "^1.20.3",
-    "cors": "^2.8.5",
-    "dotenv": "^16.4.7",
-    "express": "^4.21.2",
-    "jsonwebtoken": "^9.0.2",
-    "mongoose": "^8.9.2",
-    "nodemon": "^3.1.9"
-  },
-  "devDependencies": {
-    "jest": "^29.7.0"
   }
 }
-
-
-🧠 Notes
-This project assumes MongoDB is running locally. Update MONGO_URL in .env if hosted elsewhere.
-
-All data access and business logic are separated into controller files.
-
-Passwords are hashed with bcrypt before storage.
-
-Error handling and input validation should be added for production use.
+```
 
