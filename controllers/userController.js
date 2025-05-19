@@ -7,11 +7,11 @@ export function userRegister(req, res) {
 
     data.password = bcrypt.hashSync(data.password, 10);
     const user = new User(data);
-    console.log("just camuyoyoe")
+  
    
     user.save().then(() => {
         res.status(201).send({ message: "User registered successfully" })
-        console.log("iloweuoiyoyo")
+       
     }).catch((error) => {
         res.status(400).send({ error: "User registration failed" })
         console.log("error is", error)

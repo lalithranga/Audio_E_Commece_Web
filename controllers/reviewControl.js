@@ -35,13 +35,7 @@ export async function getAllReviews(req, res) {
         })
         return
 
-        // try {
-        //     const reviews = await Review.find({ isApproved: true });
-        //     res.send(reviews);
-        // }
-        // catch (error) {
-        //     res.status(400).send({ message: error.message });
-        // }
+        
     }
 
     if (req.user.role == "admin") {
@@ -115,11 +109,7 @@ export async function getReviews(req,res) {
         const reviews = await Review.find({isApproved:true})
         res.json(reviews)
     }
-    //     const reviews = await Review.find({ isApproved:true })
-    //        res.json(reviews);
-    //     });
-    //     return;
-    // }
+   
 
     try{
         if(user.role == "admin"){

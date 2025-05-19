@@ -78,15 +78,4 @@ export async function updateProduct(req, res) {
   }
 }
 
-export async function getProduct(req, res) {
-  try {
-    const product =
-      await Product.findOne({ key: req.params.key });
-    res.send(product);
-  } catch (error) {
-    res.status(500).json({ error: "Failed to get product" });
-  }
-}
-
-
 
